@@ -73,6 +73,6 @@ with open(output_path, 'w') as txtfile:
     txtfile.write('----------------------------\n')
     txtfile.write(f'Total Months: {months}\n')
     txtfile.write(f'Total: ${net_total}\n')
-    txtfile.write(f'Average Change: {(avg_change / (months-1)).__round__(2)}\n')
+    txtfile.write(f'Average Change: {avg_change.__round__(2)}')
     txtfile.write(f'Greatest Increase in Profits: {inc_date} (${top_inc})\n')
     txtfile.write(f'Greatest Decrease in Profits: {dec_date} (${top_dec})\n')
