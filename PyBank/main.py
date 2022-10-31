@@ -1,8 +1,8 @@
 import os
 import csv
 
-#csvpath = os.path.join('..','Resources','budget_data.csv')
-csvpath = 'C://Users/ivanv/Desktop/Bootcamp/python-challenge/PyBank/Resources/budget_data.csv'
+#CSV file with accounting data
+csvpath = os.path.join('Resources','budget_data.csv')
 
 #Variables to hold statistics and calculations
 months = 0
@@ -13,10 +13,10 @@ top_dec = 0
 inc_date =''
 dec_date= ''
 previous_pl = 0
-#Create dictionary to hold values from CSV & to perform calculations on
+#Dictionary for P/L changes
 pl_changes = {}
 
-#Read in csv file 
+#Read in csv file
 with open (csvpath) as csvfile:
 
     csvreader = csv.reader(csvfile, delimiter=',')
@@ -28,10 +28,9 @@ with open (csvpath) as csvfile:
     for row in csvreader:
         
         pl_changes[row[0]]=[int(row[1]),int(row[1])-previous_pl]
-        previous_pl = int(row[1])
-        
+        previous_pl = int(row[1])    
     
-    #Perform calculations on values stored in dictionary    
+#Perform calculations on values stored in dictionary    
 for x in pl_changes.keys():
     #Sum of total P/L amounts
     net_total += pl_changes[x][0]
@@ -58,14 +57,13 @@ print('Financial Analysis')
 print('----------------------------')
 print(f'Total Months: {months}')
 print(f'Total: ${net_total}')
-print(f'Average Change: {avg_change.__round__(2)}')
+print(f'Average Change: ${avg_change.__round__(2)}')
 print(f'Greatest Increase in Profits: {inc_date} (${top_inc})')
 print(f'Greatest Decrease in Profits: {dec_date} (${top_dec})')
 
 
 #Print analysis to output text file in Analysis folder
-#output_path = os.path.join('..','Analysis','budget_analysis.txt')
-output_path = r'C:\Users\ivanv\Desktop\Bootcamp\python-challenge\PyBank\Analysis\budget_analysis.txt'
+output_path = os.path.join('Analysis','budget_analysis.txt')
 
 with open(output_path, 'w') as txtfile:
 
@@ -73,7 +71,7 @@ with open(output_path, 'w') as txtfile:
     txtfile.write('----------------------------\n')
     txtfile.write(f'Total Months: {months}\n')
     txtfile.write(f'Total: ${net_total}\n')
-    txtfile.write(f'Average Change: {avg_change.__round__(2)}\n')
+    txtfile.write(f'Average Change: ${avg_change.__round__(2)}\n')
     txtfile.write(f'Greatest Increase in Profits: {inc_date} (${top_inc})\n')
     txtfile.write(f'Greatest Decrease in Profits: {dec_date} (${top_dec})\n')
     
